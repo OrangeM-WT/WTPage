@@ -1,102 +1,104 @@
-/* 1. 부드러운 스크롤 핵심 옵션 */
-html {
-  scroll-behavior: smooth;
-}
+/* 기본 초기화 및 폰트 설정 */
 body {
   margin: 0;
-  font-family: 'Pretendard', sans-serif;
-  line-height: 1.6;
-}
-
-/* 상단 고정 네비게이션 바 */
-nav {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background: rgba(255, 255, 255, 0.95);
-  padding: 15px 0;
-  text-align: center;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  z-index: 1000;
-}
-nav a {
-  margin: 0 15px;
-  text-decoration: none;
-  color: #333;
-  font-weight: bold;
-  font-size: 18px;
-}
-nav a:hover {
-  color: #007bff;
-}
-
-/* 각 섹션 기본 설정 (화면 꽉 차게) */
-section {
-  min-height: 100vh;
-  padding: 80px 20px 20px;
-  box-sizing: border-box;
+  padding: 0;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background-color: #f3f4f6; /* 연한 회색 배경 */
+  color: #1f2937;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-#home { background-color: #f8f9fa; }
-#gallery { background-color: #ffffff; }
-#contact { background-color: #e9ecef; }
-
-/* 2. 장소 선택 탭 버튼 디자인 */
-.tab-container {
-  width: 100%;
-  max-width: 800px;
-  margin-top: 30px;
-}
-.tab-buttons {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-.tab-btn {
-  padding: 10px 30px;
-  margin: 0 5px;
-  border: 1px solid #ccc;
-  background-color: #fff;
-  cursor: pointer;
-  border-radius: 20px;
-  font-size: 16px;
-  transition: 0.3s;
-}
-.tab-btn.active {
-  background-color: #333;
-  color: #fff;
-  border-color: #333;
+  min-height: 100vh;
 }
 
-/* 탭 콘텐츠 영역 */
-.tab-content {
-  display: none; /* 기본으로 모두 숨김 */
-  width: 100%;
-  height: 400px; /* 슬라이더 이미지 높이 지정 */
-  background: #eee;
-  border-radius: 15px;
+/* 헤더 디자인 */
+.main-header {
+  text-align: center;
+  padding: 60px 20px 40px;
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+.main-header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  color: #111827;
+}
+.main-header p {
+  margin-top: 10px;
+  color: #6b7280;
+  font-size: 1.1rem;
+}
+
+/* 📱 반응형 카드 그리드 컨테이너 (핵심) */
+.grid-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+  display: grid;
+  /* 화면이 넓으면 3개, 작아지면 2개, 모바일에선 1개로 자동 정렬 */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  flex: 1; /* 푸터를 바닥에 고정하기 위함 */
+}
+
+/* 콘텐츠 카드 컴포넌트 디자인 */
+.content-card {
+  background-color: #ffffff;
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-.tab-content.active {
-  display: block; /* 활성화된 탭만 보임 */
+  text-decoration: none; /* 링크 밑줄 제거 */
+  color: inherit;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-/* 3. Swiper 이미지 슬라이더 설정 */
-.swiper {
+/* 마우스 올렸을 때(Hover) 부드럽게 떠오르는 효과 */
+.content-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* 카드 이미지 영역 */
+.card-image {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background-color: #e5e7eb;
+}
+.card-image img {
   width: 100%;
   height: 100%;
+  object-fit: cover; /* 이미지가 비율 깨지지 않고 꽉 차게 */
+  transition: transform 0.3s ease;
 }
-.swiper-slide {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 24px;
-  color: #fff;
+.content-card:hover .card-image img {
+  transform: scale(1.05); /* 마우스 올리면 사진 미세하게 확대 */
 }
-/* 구분을 위한 임시 배경색 (나중에 이미지로 교체) */
-.place1 .swiper-slide { background-color: #ff8a8a; }
-.place2 .swiper-slide { background-color: #8ab6ff; }
+
+/* 카드 텍스트 영역 */
+.card-body {
+  padding: 24px;
+}
+.card-title {
+  margin: 0 0 10px 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #111827;
+}
+.card-desc {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #4b5563;
+  line-height: 1.5;
+}
+
+/* 푸터 디자인 */
+.main-footer {
+  text-align: center;
+  padding: 30px 20px;
+  color: #9ca3af;
+  font-size: 0.875rem;
+  background-color: #ffffff;
+  border-top: 1px solid #e5e7eb;
+}
