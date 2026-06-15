@@ -69,6 +69,7 @@
   <script>
     let swiperInstance = null;
 
+    // 1. Swiper 슬라이더 초기화 함수
     function initSwiper() {
       if (swiperInstance !== null) {
         swiperInstance.destroy(true, true);
@@ -86,6 +87,7 @@
       });
     }
 
+    // 2. 탭 전환 함수
     function openTab(evt, tabId) {
       const tabContents = document.querySelectorAll('.tab-content');
       tabContents.forEach(content => content.classList.remove('active'));
@@ -98,6 +100,17 @@
 
       initSwiper();
     }
+
+    // ★ 3. [핵심] 메뉴바의 상단 고정 및 배경 변환 스크롤 감지 시스템
+    window.addEventListener('scroll', function() {
+      const nav = document.querySelector('.custom-nav');
+      // 상단 구름 높이인 150px 이상 스크롤되면 클래스 부여하여 배경을 켭니다.
+      if (window.scrollY > 150) {
+        nav.classList.add('stuck');
+      } else {
+        nav.classList.remove('stuck');
+      }
+    });
 
     window.onload = function() {
       initSwiper();
