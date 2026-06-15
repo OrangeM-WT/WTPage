@@ -28,7 +28,7 @@ body::before {
   
   /* 💡 [중요] 자른 bg-top.png 이미지의 [원본 가로픽셀 / 원본 세로픽셀] 비율을 적어주세요. */
   /* 이렇게 하면 화면 폭이 늘어날 때 세로도 황금비율로 같이 커져서 절대 찌그러지지 않습니다. */
-  aspect-ratio: 1000 / 180; 
+  aspect-ratio: 864 / 320; 
   
   background-image: url('bg-top.png');
   background-repeat: no-repeat;
@@ -47,7 +47,7 @@ body::after {
   width: 100%;
   
   /* 💡 마찬가지로 bg-bottom.png 이미지의 [원본 가로 / 원본 세로] 비율을 적어주세요. */
-  aspect-ratio: 1000 / 180; 
+  aspect-ratio: 864 / 320;  
   
   background-image: url('bg-bottom.png');
   background-repeat: no-repeat;
