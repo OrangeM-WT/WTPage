@@ -3,32 +3,37 @@ html {
 }
 
 /* ==========================================================================
-   1. 배경 이미지 세팅 (동일 폴더 구조 반영 완료)
+   1. 배경 이미지 세팅 (★비율 찌러짐 절대 방지 시스템)
    ========================================================================== */
+/* [중단 배경] 좌우 라인을 비율에 맞게 늘리고 아래로 무한 반복 */
 body {
   margin: 0;
   padding: 0;
   font-family: 'Pretendard', sans-serif;
   color: #ffffff;
-  background-image: url('bg-middle.png'); /* 중단 무한반복 */
+  background-image: url('bg-middle.png'); 
   background-repeat: repeat-y;
   background-position: center top;
-  background-size: 100% auto;
+  background-size: 100% auto; /* 가로에 맞추어 세로 비율 자동 조절 */
   background-color: #0d0d0d;
 }
 
-/* [상단 액자 틀] */
+/* [상단 액자 틀] 종횡비 고정으로 찌그러짐 원천 차단 */
 body::before {
   content: "";
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 180px; 
+  
+  /* 💡 [중요] 자른 bg-top.png 이미지의 [원본 가로픽셀 / 원본 세로픽셀] 비율을 적어주세요. */
+  /* 이렇게 하면 화면 폭이 늘어날 때 세로도 황금비율로 같이 커져서 절대 찌그러지지 않습니다. */
+  aspect-ratio: 1000 / 180; 
+  
   background-image: url('bg-top.png');
   background-repeat: no-repeat;
   background-position: center top;
-  background-size: 100% 100%;
+  background-size: cover;
   z-index: 999; 
   pointer-events: none; 
 }
@@ -40,56 +45,62 @@ body::after {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 180px; 
+  
+  /* 💡 마찬가지로 bg-bottom.png 이미지의 [원본 가로 / 원본 세로] 비율을 적어주세요. */
+  aspect-ratio: 1000 / 180; 
+  
   background-image: url('bg-bottom.png');
   background-repeat: no-repeat;
   background-position: center bottom;
-  background-size: 100% 100%;
+  background-size: cover;
   z-index: 999;
   pointer-events: none;
 }
 
 /* ==========================================================================
-   2. ★ 명품 무빙 네비게이션 바 디자인 (Sticky + Dynamic 변환)
+   2. ★ 네비게이션 메뉴 고정 위치 수정 (진한 테두리 아래 고정)
    ========================================================================== */
 .custom-nav {
-  position: sticky;          /* 흐름에 따라 움직이다 상단에 도달하면 고정 */
-  top: 0;                    /* 브라우저 최상단(0)에 붙음 */
+  position: sticky;          
+  
+  /* 🎯 [핵심 설정] top: 0 대신 테두리 두께만큼 값을 주면, 스크롤 되다가 딱 그 자리에 멈춥니다! */
+  /* 상단 구름 문양 및 진한 테두리선의 두께에 맞춰 아래 숫자를 30px, 50px 등으로 미세 조정해 보세요. */
+  top: 40px;                 
+  
   left: 0;
   width: 100%;
   z-index: 1000;             /* 고정 액자틀(999)보다 위 레이어에 배치 */
   
-  /* ◀ 요청하신 초기 상태 세팅 */
-  background: transparent;   /* 1. 배경을 완전 투명하게 처리 */
-  margin-top: 150px;         /* 2. 구름 문양 아래로 흘러내리도록 위치 하강 */
+  background: transparent;   /* 초기 상태는 완전 투명 */
+  margin-top: 140px;         /* 초기 상태에서 구름 아래에 위치하도록 내림 */
   padding: 20px 0;
   
   border-bottom: 1px solid transparent;
-  transition: background 0.35s ease, backdrop-filter 0.35s ease, border-color 0.35s ease, padding 0.35s ease;
+  transition: background 0.3s ease, backdrop-filter 0.3s ease, border-color 0.3s ease, padding 0.3s ease;
 }
 
 .custom-nav a {
   margin: 0 20px;
   text-decoration: none;
-  color: #ffffff;            /* 검은 배경 위에서 잘 보이도록 초기는 화이트 */
+  color: #ffffff;            
   font-weight: bold;
   font-size: 16px;
   transition: 0.3s;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.8); /* 투명 배경일 때 시인성 확보 */
+  text-shadow: 0 2px 4px rgba(0,0,0,0.9); /* 투명 배경일 때 글씨 안 보임 방지 */
 }
 .custom-nav a:hover {
   color: #e5c158;
 }
 
-/* ◀ [핵심] 사용자가 스크롤을 내려서 상단에 메뉴가 흡착된 순간 발동되는 스타일 */
+/* 스크롤이 내려가 상단 테두리선 아래에 착 밀착되었을 때 발동하는 스타일 */
 .custom-nav.stuck {
-  background: rgba(13, 13, 13, 0.85); /* 겹치는 본문 글자를 막아주는 고급 반투명 블랙 패널 */
-  backdrop-filter: blur(8px);         /* 뒤로 스쳐 지나가는 본문을 흐릿하게 처리하는 효과 */
-  border-bottom: 1px solid rgba(229, 193, 88, 0.2); /* 얇은 금빛 구분선 노출 */
-  padding: 14px 0;                    /* 고정되었을 때 슬림하게 크기 축소 */
+  background: rgba(13, 13, 13, 0.85); /* 본문 글자와 겹쳐도 잘 보이도록 어두운 유리막 적용 */
+  backdrop-filter: blur(8px);         /* 뒤로 지나가는 콘텐츠를 흐릿하게 뭉개줌 */
+  border-bottom: 1px solid rgba(229, 193, 88, 0.2); /* 은은한 하단 금빛 선 */
+  padding: 14px 0;                    
 }
 .custom-nav.stuck a {
-  color: #aaaaaa;                     /* 고정 시 정돈된 느낌의 회색조 폰트 */
+  color: #aaaaaa;                     
 }
 .custom-nav.stuck a:hover {
   color: #e5c158;
@@ -106,93 +117,28 @@ section {
   justify-content: center;
   text-align: center;
   box-sizing: border-box;
-  background-color: transparent !important; /* 배경 투과 필수 */
-  padding: 140px 40px; 
+  background-color: transparent !important; 
+  padding: 160px 40px; 
 }
 
-/* 첫 번째 섹션만 네비게이션 마진을 고려해 상단 패딩을 살짝 작게 조절 */
 #home {
-  min-height: calc(100vh - 150px);
-  padding-top: 60px;
+  min-height: calc(100vh - 140px);
+  padding-top: 40px;
 }
 
-/* 텍스트 및 슬라이더 시스템 */
-.glow-title {
-  font-size: 3rem;
-  color: #e5c158;
-  text-shadow: 0 0 15px rgba(229, 193, 88, 0.4);
-}
-.section-title {
-  font-size: 2.2rem;
-  color: #e5c158;
-  margin-bottom: 25px;
-}
-.sub-text {
-  color: #e5e5e5;
-  font-size: 1.1rem;
-  line-height: 1.7;
-}
-
-.tab-container {
-  width: 100%;
-  max-width: 600px;
-  z-index: 10;
-}
-.tab-buttons {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-}
+/* 4. 이미지 슬라이더 및 탭 시스템 디자인 (기존과 동일) */
+.tab-container { width: 100%; max-width: 600px; z-index: 10; }
+.tab-buttons { display: flex; justify-content: center; margin-bottom: 20px; }
 .tab-btn {
-  padding: 10px 25px;
-  margin: 0 8px;
-  border: 1px solid rgba(229, 193, 88, 0.4);
-  background-color: rgba(0, 0, 0, 0.6);
-  color: #aaaaaa;
-  cursor: pointer;
-  border-radius: 20px;
-  font-size: 15px;
-  transition: 0.3s;
+  padding: 10px 25px; margin: 0 8px; border: 1px solid rgba(229, 193, 88, 0.4);
+  background-color: rgba(0, 0, 0, 0.6); color: #aaaaaa; cursor: pointer; border-radius: 20px; font-size: 15px; transition: 0.3s;
 }
-.tab-btn.active {
-  background-color: #e5c158;
-  color: #000000;
-  font-weight: bold;
-  border-color: #e5c158;
-}
-
-.tab-content {
-  display: none;
-  width: 100%;
-  height: 380px;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.7);
-  border: 1px solid rgba(229, 193, 88, 0.3);
-  background-color: #111111;
-}
-.tab-content.active {
-  display: block;
-}
-
-.swiper {
-  width: 100%;
-  height: 100%;
-}
-.swiper-slide {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 20px;
-  color: #fff;
-  font-weight: bold;
-}
+.tab-btn.active { background-color: #e5c158; color: #000000; font-weight: bold; border-color: #e5c158; }
+.tab-content { display: none; width: 100%; height: 380px; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.7); border: 1px solid rgba(229, 193, 88, 0.3); background-color: #111111; }
+.tab-content.active { display: block; }
+.swiper { width: 100%; height: 100%; }
+.swiper-slide { display: flex; justify-content: center; align-items: center; font-size: 20px; color: #fff; font-weight: bold; }
 .place1 .swiper-slide { background-color: rgba(42, 31, 31, 0.8); }
 .place2 .swiper-slide { background-color: rgba(31, 37, 42, 0.8); }
-
-.swiper-button-next, .swiper-button-prev {
-  color: #e5c158 !important;
-}
-.swiper-pagination-bullet-active {
-  background: #e5c158 !important;
-}
+.swiper-button-next, .swiper-button-prev { color: #e5c158 !important; }
+.swiper-pagination-bullet-active { background: #e5c158 !important; }
