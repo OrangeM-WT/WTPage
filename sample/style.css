@@ -8,6 +8,18 @@ body {
   line-height: 1.6;
 }
 
+.bg-container {
+  width: 100%;             /* 📱 모바일에선 말씀하신 대로 가로 100% */
+  max-width: 450px;        /* 💻 하지만 PC 화면을 고려해 가로 최대 크기를 제한 */
+  
+  height: 100vh;           /* 화면 높이에 딱 맞춤 */
+  margin: 0 auto;          /* PC에서는 화면 정중앙에 배치 */
+  
+  background-image: url('bg.png');
+  background-size: cover;  /* 또는 contain을 주어 가로세로 비율을 강제 유지 */
+  background-position: center;
+}
+
 /* 상단 고정 네비게이션 바 */
 nav {
   position: fixed;
@@ -43,6 +55,21 @@ section {
 #home { background-color: #f8f9fa; }
 #gallery { background-color: #ffffff; }
 #contact { background-color: #e9ecef; }
+
+.phone-container {
+  width: 100%;
+  max-width: 450px; /* PC에서는 스마트폰 크기로 제한 */
+  height: 92vh;     /* 화면 높이에 맞춤 */
+  margin: 4vh auto; /* 가운데 정렬 */
+  background-image: url('bg.png');
+  background-size: 100% 100%; /* 프레임이 구겨지지 않게 꽉 채움 */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  border-radius: 20px; /* 이미지 라운드에 맞춰 부드럽게 */
+
+  /* ★ 중요: 프레임은 고정하고 내부 알맹이만 스크롤 */
+  overflow-y: auto; 
+  padding: 40px; /* 금빛 테두리를 침범하지 않도록 여백 설정 */
+}
 
 /* 2. 장소 선택 탭 버튼 디자인 */
 .tab-container {

@@ -42,21 +42,6 @@ body {
   flex: 1; /* 푸터를 바닥에 고정하기 위함 */
 }
 
-.phone-container {
-  width: 100%;
-  max-width: 450px; /* PC에서는 스마트폰 크기로 제한 */
-  height: 92vh;     /* 화면 높이에 맞춤 */
-  margin: 4vh auto; /* 가운데 정렬 */
-  background-image: url('bg.png');
-  background-size: 100% 100%; /* 프레임이 구겨지지 않게 꽉 채움 */
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-  border-radius: 20px; /* 이미지 라운드에 맞춰 부드럽게 */
-
-  /* ★ 중요: 프레임은 고정하고 내부 알맹이만 스크롤 */
-  overflow-y: auto; 
-  padding: 40px; /* 금빛 테두리를 침범하지 않도록 여백 설정 */
-}
-
 /* 콘텐츠 카드 컴포넌트 디자인 */
 .content-card {
   background-color: #ffffff;
