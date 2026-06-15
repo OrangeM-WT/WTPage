@@ -11,64 +11,60 @@
 </head>
 <body>
 
-  <div class="bg-container">
+  <nav class="custom-nav">
+    <a href="#home">홈</a>
+    <a href="#gallery">갤러리</a>
+    <a href="#contact">안내</a>
+  </nav>
 
-    <nav class="custom-nav">
-      <a href="#home">홈</a>
-      <a href="#gallery">갤러리</a>
-      <a href="#contact">안내</a>
-    </nav>
+  <section id="home">
+    <h1 class="glow-title">환영합니다</h1>
+    <p class="sub-text">아래로 스크롤 하거나 메뉴를 눌러 장소를 확인해 보세요.</p>
+  </section>
 
-    <div class="scroll-content">
+  <section id="gallery">
+    <h2 class="section-title">장소 둘러보기</h2>
+    
+    <div class="tab-container">
+      <div class="tab-buttons">
+        <button class="tab-btn active" onclick="openTab(event, 'place1')">A 장소</button>
+        <button class="tab-btn" onclick="openTab(event, 'place2')">B 장소</button>
+      </div>
 
-      <section id="home">
-        <h1 class="glow-title">환영합니다</h1>
-        <p class="sub-text">아래로 스크롤 하거나 메뉴를 눌러 장소를 확인해 보세요.</p>
-      </section>
-
-      <section id="gallery">
-        <h2 class="section-title">장소 둘러보기</h2>
-        
-        <div class="tab-container">
-          <div class="tab-buttons">
-            <button class="tab-btn active" onclick="openTab(event, 'place1')">A 장소</button>
-            <button class="tab-btn" onclick="openTab(event, 'place2')">B 장소</button>
+      <div id="place1" class="tab-content active place1">
+        <div class="swiper mySwiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">A 장소 - 사진 1</div>
+            <div class="swiper-slide">A 장소 - 사진 2</div>
+            <div class="swiper-slide">A 장소 - 사진 3</div>
           </div>
-
-          <div id="place1" class="tab-content active place1">
-            <div class="swiper mySwiper">
-              <div class="swiper-wrapper">
-                <div class="swiper-slide">A 장소 - 사진 1</div>
-                <div class="swiper-slide">A 장소 - 사진 2</div>
-                <div class="swiper-slide">A 장소 - 사진 3</div>
-              </div>
-              <div class="swiper-button-next"></div>
-              <div class="swiper-button-prev"></div>
-              <div class="swiper-pagination"></div>
-            </div>
-          </div>
-
-          <div id="place2" class="tab-content place2">
-            <div class="swiper mySwiper">
-              <div class="swiper-wrapper">
-                <div class="swiper-slide">B 장소 - 사진 1</div>
-                <div class="swiper-slide">B 장소 - 사진 2</div>
-                <div class="swiper-slide">B 장소 - 사진 3</div>
-              </div>
-              <div class="swiper-button-next"></div>
-              <div class="swiper-button-prev"></div>
-              <div class="swiper-pagination"></div>
-            </div>
-          </div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-pagination"></div>
         </div>
-      </section>
+      </div>
 
-      <section id="contact">
-        <h2 class="section-title">상세 안내</h2>
-        <p class="sub-text">콘텐츠에 대한 추가적인 설명이 들어가는 공간입니다.</p>
-      </section>
+      <div id="place2" class="tab-content place2">
+        <div class="swiper mySwiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">B 장소 - 사진 1</div>
+            <div class="swiper-slide">B 장소 - 사진 2</div>
+            <div class="swiper-slide">B 장소 - 사진 3</div>
+          </div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    </div> </div> <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <section id="contact">
+    <h2 class="section-title">상세 안내</h2>
+    <p class="sub-text">콘텐츠에 대한 추가적인 설명이 들어가는 공간입니다.</p>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   
   <script>
     let swiperInstance = null;
