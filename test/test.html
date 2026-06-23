@@ -1,17 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>유니티 통신 격리 테스트</title>
+    <style>
+        body { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; font-family: sans-serif; background-color: #f0f2f6; }
+        button { margin: 20px; padding: 30px; font-size: 24px; font-weight: bold; cursor: pointer; border-radius: 15px; border: none; width: 80%; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .btn-webview { background-color: #4CAF50; color: white; }
+        .btn-deeplink { background-color: #2196F3; color: white; }
+        a { text-decoration: none; width: 100%; display: flex; justify-content: center; }
+    </style>
 </head>
-<body style="font-size: 50px; text-align: center; margin-top: 50%;">
-    <button onclick="window.WellWebView.PostMessage('Unity_Print', '')" style="font-size: 50px; padding: 20px;">
-        1. 객체 방식 테스트
-    </button>
-    
-    <br><br>
+<body>
+    <h2>Iframe 없는 순수 HTML 테스트</h2>
 
-    <a href="wellwebview://Unity_Print">
-        <button style="font-size: 50px; padding: 20px;">2. 링크 방식 테스트</button>
+    <a href="unity://Unity_Print">
+        <button class="btn-webview">1. 웹뷰 방식 테스트<br>(unity://)</button>
+    </a>
+
+    <a href="unitydl://mylink?action=Print">
+        <button class="btn-deeplink">2. OS 딥링크 방식 테스트<br>(unitydl://)</button>
     </a>
 </body>
 </html>
